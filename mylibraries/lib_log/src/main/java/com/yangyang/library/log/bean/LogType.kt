@@ -1,4 +1,4 @@
-package com.yangyang.library.log.data
+package com.yangyang.library.log.bean
 
 import android.util.Log
 import androidx.annotation.IntDef

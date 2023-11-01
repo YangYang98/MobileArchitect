@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.yangyang.library.log.L
+import com.yangyang.library.log.bean.LogConfig
+import com.yangyang.library.log.bean.LogType
 import com.yangyang.mobile.architect.R
 
 
@@ -22,6 +24,15 @@ class LogDemoActivity : AppCompatActivity() {
     }
 
     private fun printLog() {
-        L.a("LogDemoActivity: yangyang")
+        L.log(object : LogConfig() {
+            override fun includeThread(): Boolean {
+                return true
+            }
+
+            override fun stackTraceDepth(): Int {
+                return 5
+            }
+        }, LogType.E, "LogDemoActivity:", " yangyang")
+        L.e("LogDemoActivity: yangyang")
     }
 }

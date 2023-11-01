@@ -1,9 +1,9 @@
 package com.yangyang.library.log
 
-import android.util.Log
-import com.yangyang.library.log.data.LogConfig
-import com.yangyang.library.log.data.LogType
-import java.lang.StringBuilder
+import com.yangyang.library.log.bean.LogConfig
+import com.yangyang.library.log.bean.LogType
+import com.yangyang.library.log.printer.ILogPrinter
+import com.yangyang.library.log.utils.StackTraceUtil
 
 
 /**
@@ -12,6 +12,9 @@ import java.lang.StringBuilder
 class L {
 
     companion object {
+
+        private val className = L::class.java.name
+        private val LOG_PACKAGE: String = className.substring(0, className.lastIndexOf('.') + 1)
 
         @JvmStatic
         fun v(vararg contents: Any) {
@@ -86,12 +89,29 @@ class L {
                 return
             }
             val sb = StringBuilder()
-            val body = parseBody(contents)
+            if (config.includeThread()) {
+                val threadInfo = LogConfig.THREAD_FORMATTER.format(Thread.currentThread())
+                sb.append(threadInfo).append("\n")
+            }
+            if (config.stackTraceDepth() > 0) {
+                val stackTrace = LogConfig.STACK_TRACE_FORMATTER.format(
+                    StackTraceUtil.getCroppedStackTrace(Throwable().stackTrace, LOG_PACKAGE, config.stackTraceDepth())
+                )
+                sb.append(stackTrace).append("\n")
+            }
+            val body = parseBody(contents, config)
             sb.append(body)
-            Log.println(type, tag, body)
+            val printers: List<ILogPrinter> = if (!config.printers().isNullOrEmpty()) config.printers()!!.asList() else LogManager.getInstance().getPrinters()
+
+            printers.forEach {
+                it.print(config, type, tag, sb.toString())
+            }
         }
 
-        private fun parseBody(contents: Array<out Any>): String {
+        private fun parseBody(contents: Array<out Any>, config: LogConfig): String {
+            if (config.injectJsonParser() != null) {
+                return config.injectJsonParser()!!.toJson(contents)
+            }
             val sb = StringBuilder()
             contents.forEach {
                 sb.append(it.toString()).append(";")
