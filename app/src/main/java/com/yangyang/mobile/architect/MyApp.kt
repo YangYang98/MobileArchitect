@@ -5,6 +5,7 @@ import com.google.gson.Gson
 import com.yangyang.library.log.LogManager
 import com.yangyang.library.log.bean.LogConfig
 import com.yangyang.library.log.printer.ConsolePrinter
+import com.yangyang.library.log.printer.FilePrinter
 
 
 /**
@@ -15,19 +16,22 @@ class MyApp : Application() {
     override fun onCreate() {
         super.onCreate()
 
-        LogManager.init(object : LogConfig() {
-
-            override fun injectJsonParser(): JsonParser {
-                return object : JsonParser {
-                    override fun toJson(src: Any): String {
-                        return Gson().toJson(src)
+        LogManager.init(
+            object : LogConfig() {
+                override fun injectJsonParser(): JsonParser? {
+                    return object : JsonParser {
+                        override fun toJson(src: Any): String {
+                            return Gson().toJson(src)
+                        }
                     }
                 }
-            }
 
-            override fun enable(): Boolean {
-                return true
-            }
-        }, ConsolePrinter())
+                override fun enable(): Boolean {
+                    return true
+                }
+            },
+            ConsolePrinter(),
+            FilePrinter.getInstance(applicationContext.cacheDir.absolutePath + "/aaa", 0)
+        )
     }
 }
