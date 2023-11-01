@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace 'com.yangyang.library.log'
+    namespace 'com.yangyang.mobile.utils'
     compileSdk 33
 
     defaultConfig {
@@ -37,6 +37,4 @@ dependencies {
     testImplementation libs.junit
     androidTestImplementation libs.androidx.test.ext.junit
     androidTestImplementation libs.espresso.core
-
-    implementation project(":mylibraries:lib_utils")
 }

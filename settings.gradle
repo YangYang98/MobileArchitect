@@ -17,3 +17,4 @@ rootProject.name = "MobileArchitect"
 include ':app'
 include ':mylibraries'
 include ':mylibraries:lib_log'
+include ':mylibraries:lib_utils'

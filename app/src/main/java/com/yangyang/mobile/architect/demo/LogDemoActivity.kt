@@ -4,8 +4,10 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.yangyang.library.log.L
+import com.yangyang.library.log.LogManager
 import com.yangyang.library.log.bean.LogConfig
 import com.yangyang.library.log.bean.LogType
+import com.yangyang.library.log.printer.ViewPrinter
 import com.yangyang.mobile.architect.R
 
 
@@ -14,6 +16,8 @@ import com.yangyang.mobile.architect.R
  */
 class LogDemoActivity : AppCompatActivity() {
 
+    private val viewPrinter: ViewPrinter by lazy { ViewPrinter(this) }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -21,6 +25,9 @@ class LogDemoActivity : AppCompatActivity() {
         findViewById<View>(R.id.btn_log).setOnClickListener {
             printLog()
         }
+
+        viewPrinter.getViewProvider().showFloatingView()
+        LogManager.getInstance().addPrinter(viewPrinter)
     }
 
     private fun printLog() {
