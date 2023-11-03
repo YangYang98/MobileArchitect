@@ -31,7 +31,7 @@ class MyApp : Application() {
                 }
             },
             ConsolePrinter(),
-            FilePrinter.getInstance(applicationContext.cacheDir.absolutePath + "/aaa", 0)
+            FilePrinter.getInstance(applicationContext.cacheDir.absolutePath, 0)
         )
     }
 }

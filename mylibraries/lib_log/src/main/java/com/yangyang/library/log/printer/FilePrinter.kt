@@ -199,7 +199,7 @@ class FilePrinter private constructor(private val logPath: String, private val r
                     it.close()
                 } catch (e: IOException) {
                     e.printStackTrace()
-                    return@let false
+                    return false
                 } finally {
                     bufferedWriter = null
                     preFileName = null
