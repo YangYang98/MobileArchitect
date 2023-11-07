@@ -12,6 +12,7 @@
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/mylibraries" />
             <option value="$PROJECT_DIR$/mylibraries/lib_log" />
+            <option value="$PROJECT_DIR$/mylibraries/lib_tab" />
             <option value="$PROJECT_DIR$/mylibraries/lib_utils" />
           </set>
         </option>
