@@ -1,6 +1,7 @@
 package com.yangyang.mobile.architect.logic
 
 import android.content.res.Resources
+import android.os.Bundle
 import android.view.View
 import androidx.annotation.StringRes
 import androidx.fragment.app.FragmentManager
@@ -20,7 +21,7 @@ import com.yangyang.mobile.architect.fragment.RecommendFragment
 /**
  * Create by Yang Yang on 2023/11/8
  */
-class MainActivityLogic(private val activityProvider: ActivityProvider) {
+class MainActivityLogic(private val activityProvider: ActivityProvider, private val savedInstanceState: Bundle?) {
 
     lateinit var fragmentTabView: FragmentTabView
         private set
@@ -29,7 +30,15 @@ class MainActivityLogic(private val activityProvider: ActivityProvider) {
     private val infoList = mutableListOf<TabBottomInfo<*>>()
     private var currentItemIndex: Int = 0
 
+    companion object {
+        private const val SAVED_CURRENT_ID = "SAVED_CURRENT_ID"
+    }
+
     init {
+        //fix 不保留活动导致的Fragment重叠问题
+        if (savedInstanceState != null) {
+            currentItemIndex = savedInstanceState.getInt(SAVED_CURRENT_ID)
+        }
         initTabBottom()
     }
 
@@ -131,6 +140,9 @@ class MainActivityLogic(private val activityProvider: ActivityProvider) {
         fragmentTabView.adapter = tabViewAdapter
     }
 
+    fun onSaveInstanceState(outState: Bundle) {
+        outState.putInt(SAVED_CURRENT_ID, currentItemIndex)
+    }
 
     // 需要Activity提供的能力
     interface ActivityProvider {
