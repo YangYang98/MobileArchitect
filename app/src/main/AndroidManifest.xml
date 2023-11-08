@@ -26,6 +26,8 @@
         <activity android:name=".demo.LogDemoActivity" android:exported="false"/>
 
         <activity android:name=".demo.TabBottomDemoActivity" android:exported="false"/>
+
+        <activity android:name=".demo.TabTopDemoActivity" android:exported="false"/>
     </application>
 
 </manifest>

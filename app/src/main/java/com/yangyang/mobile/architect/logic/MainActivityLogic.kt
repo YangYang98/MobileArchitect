@@ -16,6 +16,7 @@ import com.yangyang.mobile.architect.fragment.FavoriteFragment
 import com.yangyang.mobile.architect.fragment.HomePageFragment
 import com.yangyang.mobile.architect.fragment.ProfileFragment
 import com.yangyang.mobile.architect.fragment.RecommendFragment
+import com.yangyang.mobile.architect.fragment.TestDemoFragment
 
 
 /**
@@ -109,12 +110,24 @@ class MainActivityLogic(private val activityProvider: ActivityProvider, private 
             fragment = ProfileFragment::class.java
         }
 
+        val infoTest = TabBottomInfo(
+            "测试",
+            "fonts/iconfont.ttf",
+            activityProvider.getString(R.string.if_profile),
+            null,
+            defaultColor,
+            tintColor
+        ).apply {
+            fragment = TestDemoFragment::class.java
+        }
+
         with(infoList) {
             add(homeInfo)
             add(infoRecommend)
             add(infoCategory)
             add(infoFavorite)
             add(infoProfile)
+            add(infoTest)
         }
         tabBottomLayout.inflateInfo(infoList)
         initFragmentTabView()

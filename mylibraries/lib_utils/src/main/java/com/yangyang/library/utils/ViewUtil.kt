@@ -40,3 +40,30 @@ object ViewUtil {
     }
 
 }
+
+fun View?.gone() {
+    this?.visibility = View.GONE
+}
+
+fun View?.visible() {
+    this?.visibility = View.VISIBLE
+}
+
+fun View?.invisible() {
+    this?.visibility = View.INVISIBLE
+}
+
+fun View?.isVisible(): Boolean = this?.visibility == View.VISIBLE
+
+fun View?.isGone(): Boolean = this?.visibility == View.GONE
+
+fun View?.visibleOrGone(isVisible: Boolean, doIfVisible: ((Boolean) -> Unit)? = null) {
+    this?.visibility = if (isVisible) View.VISIBLE else View.GONE
+    if (this.isVisible()) {
+        doIfVisible?.invoke(isVisible)
+    }
+}
+
+fun View?.visibleOrInvisible(isVisible: Boolean) {
+    this?.visibility = if (isVisible) View.VISIBLE else View.INVISIBLE
+}

@@ -9,9 +9,9 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.RelativeLayout
 import android.widget.TextView
-import androidx.annotation.ColorInt
 import com.yangyang.library.tab.R
 import com.yangyang.library.tab.common.ITab
+import com.yangyang.library.utils.ColorUtil
 
 
 /**
@@ -60,15 +60,15 @@ class TabBottom @JvmOverloads constructor(
                 if (selected) {
                     with(tabIconView) {
                         text = if (tabInfo.selectedIconName.isNullOrEmpty()) tabInfo.defaultIconName else tabInfo.selectedIconName
-                        setTextColor(getTextColor(tabInfo.tintColor ?: Color.BLACK))
+                        setTextColor(ColorUtil.getTextColor(tabInfo.tintColor ?: Color.BLACK))
                     }
-                    tabNameView.setTextColor(getTextColor(tabInfo.tintColor ?: Color.BLACK))
+                    tabNameView.setTextColor(ColorUtil.getTextColor(tabInfo.tintColor ?: Color.BLACK))
                 } else {
                     with(tabIconView) {
                         text = tabInfo.defaultIconName
-                        setTextColor(getTextColor(tabInfo.defaultColor ?: Color.BLACK))
+                        setTextColor(ColorUtil.getTextColor(tabInfo.defaultColor ?: Color.BLACK))
                     }
-                    tabNameView.setTextColor(getTextColor(tabInfo.defaultColor ?: Color.BLACK))
+                    tabNameView.setTextColor(ColorUtil.getTextColor(tabInfo.defaultColor ?: Color.BLACK))
                 }
             } else if (tabInfo.tabType == TabBottomInfo.TabType.BITMAP) {
                 if (isInit) {
@@ -106,15 +106,6 @@ class TabBottom @JvmOverloads constructor(
             return
         }
         inflateInfo(prevInfo != tabInfo, false)
-    }
-
-    @ColorInt
-    private fun getTextColor(color: Any): Int {
-        return if (color is String) {
-            Color.parseColor(color)
-        } else {
-            color as Int
-        }
     }
 }
 
