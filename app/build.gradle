@@ -50,4 +50,9 @@ dependencies {
     androidTestImplementation libs.espresso.core
 
     implementation libs.gson
+
+    implementation project(":common")
+    implementation project(":mylibraries:lib_tab")
+    implementation project(":mylibraries:lib_utils")
+    implementation project(":mylibraries:lib_log")
 }
