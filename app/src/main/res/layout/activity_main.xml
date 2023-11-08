@@ -19,11 +19,16 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.yangyang.library.tab.bottom.TabBottom
-        android:id="@+id/tab_bottom"
+    <TextView
+        android:id="@+id/tv_tab_bottom"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:onClick="onClick"
+        android:text="TabBottom"
+        android:textColor="#0077cc"
+        android:textSize="20dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/tv_hilog" />
 </androidx.constraintlayout.widget.ConstraintLayout>

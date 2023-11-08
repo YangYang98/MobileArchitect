@@ -8,9 +8,9 @@ import android.view.ViewGroup
  */
 interface ITabLayout<Tab : ViewGroup, D> {
 
-    fun findTab(data: D): Tab
+    fun findTab(data: D): Tab?
 
-    fun addTabSelectedChangeListener(listener: OnTabSelectedListener<D>?)
+    fun addTabSelectedChangeListener(listener: OnTabSelectedListener<D>)
 
     fun defaultSelected(defaultInfo: D)
 
