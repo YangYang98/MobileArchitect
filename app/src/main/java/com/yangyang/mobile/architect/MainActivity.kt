@@ -1,14 +1,14 @@
 package com.yangyang.mobile.architect
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.view.View.OnClickListener
+import com.yangyang.common.ui.BaseActivity
 import com.yangyang.mobile.architect.demo.LogDemoActivity
 import com.yangyang.mobile.architect.demo.TabBottomDemoActivity
 
-class MainActivity : AppCompatActivity(), OnClickListener {
+class MainActivity : BaseActivity(), OnClickListener {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {

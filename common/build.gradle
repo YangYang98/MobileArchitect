@@ -1,20 +1,17 @@
 plugins {
-    alias(libs.plugins.androidApplication)
+    alias(libs.plugins.androidLibrary)
     alias(libs.plugins.kotlinAndroid)
 }
 
 android {
-    namespace 'com.yangyang.mobile.architect'
+    namespace 'com.yangyang.common'
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.yangyang.mobile.architect"
         minSdk 24
-        targetSdk 33
-        versionCode 1
-        versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
     }
 
     buildTypes {
@@ -30,13 +27,6 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
-    sourceSets {
-        main {
-            assets {
-                srcDirs 'src/main/assets'
-            }
-        }
-    }
 }
 
 dependencies {
@@ -44,10 +34,7 @@ dependencies {
     implementation libs.core.ktx
     implementation libs.appcompat
     implementation libs.material
-    implementation libs.constraintlayout
     testImplementation libs.junit
     androidTestImplementation libs.androidx.test.ext.junit
     androidTestImplementation libs.espresso.core
-
-    implementation libs.gson
 }

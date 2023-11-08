@@ -1,7 +1,7 @@
 package com.yangyang.mobile.architect
 
-import android.app.Application
 import com.google.gson.Gson
+import com.yangyang.common.ui.BaseApplication
 import com.yangyang.library.log.LogManager
 import com.yangyang.library.log.bean.LogConfig
 import com.yangyang.library.log.printer.ConsolePrinter
@@ -11,7 +11,7 @@ import com.yangyang.library.log.printer.FilePrinter
 /**
  * Create by Yang Yang on 2023/10/30
  */
-class MyApp : Application() {
+class MyApp : BaseApplication() {
 
     override fun onCreate() {
         super.onCreate()
