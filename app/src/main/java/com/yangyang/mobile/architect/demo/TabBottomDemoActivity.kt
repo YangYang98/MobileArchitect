@@ -46,7 +46,7 @@ class TabBottomDemoActivity : AppCompatActivity() {
             "#ffd44949"
         )
 
-        val bitmap = BitmapFactory.decodeResource(resources, R.drawable.ic_launcher_background, null)
+        val bitmap = BitmapFactory.decodeResource(resources, R.mipmap.fire, null)
 
         val infoCategory = TabBottomInfo<String>(
             "分类",

@@ -7,11 +7,15 @@ import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AbsListView
 import android.widget.FrameLayout
+import android.widget.ScrollView
+import androidx.recyclerview.widget.RecyclerView
 import com.yangyang.library.tab.R
 import com.yangyang.library.tab.common.ITabLayout
 import com.yangyang.library.tab.common.ITabLayout.OnTabSelectedListener
 import com.yangyang.library.utils.DensityUtil
+import com.yangyang.library.utils.ViewUtil
 
 
 /**
@@ -107,6 +111,8 @@ class TabBottomLayout @JvmOverloads constructor(
         addView(tabsContainer, flParams)
 
         addBottomLine()
+
+        fixContentView()
     }
 
     private fun onSelected(nextInfo: TabBottomInfo<*>) {
@@ -135,5 +141,22 @@ class TabBottomLayout @JvmOverloads constructor(
         }
         addView(bottomLine, bottomLineParams)
         bottomLine.alpha = bottomAlpha
+    }
+
+    private fun fixContentView() {
+        if (getChildAt(0) !is ViewGroup) {
+            return
+        }
+
+        val rootView = getChildAt(0) as? ViewGroup
+        var targetView: ViewGroup? = ViewUtil.findTypeView(rootView, RecyclerView::class.java)
+        if (targetView == null) {
+            targetView = ViewUtil.findTypeView(rootView, ScrollView::class.java)
+        }
+        if (targetView == null) {
+            targetView = ViewUtil.findTypeView(rootView, AbsListView::class.java)
+        }
+        targetView?.setPadding(0, 0, 0, DensityUtil.dp2px(tabBottomHeight))
+        targetView?.clipToPadding = false
     }
 }

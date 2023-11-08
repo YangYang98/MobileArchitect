@@ -73,7 +73,7 @@ class TabBottom @JvmOverloads constructor(
             } else if (tabInfo.tabType == TabBottomInfo.TabType.BITMAP) {
                 if (isInit) {
                     tabImageView.visibility = View.VISIBLE
-                    tabImageView.visibility = View.GONE
+                    tabIconView.visibility = View.GONE
                     if (tabInfo.name.isNotEmpty()) {
                         tabNameView.text = tabInfo.name
                     }
