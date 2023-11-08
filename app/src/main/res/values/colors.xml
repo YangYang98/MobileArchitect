@@ -2,4 +2,8 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <color name="tabBottomDefaultColor">#fff65667</color>
+    <color name="tabBottomTintColor">#2196F3</color>
+
 </resources>
