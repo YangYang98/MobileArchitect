@@ -1,10 +1,13 @@
 package com.yangyang.library.tab.top
 
  import android.content.Context
-import android.util.AttributeSet
+ import android.graphics.Rect
+ import android.util.AttributeSet
 import android.widget.HorizontalScrollView
 import android.widget.LinearLayout
 import com.yangyang.library.tab.common.ITabLayout
+ import com.yangyang.library.utils.DensityUtil
+ import kotlin.math.abs
 
 
 /**
@@ -47,6 +50,8 @@ class TabTopLayout @JvmOverloads constructor(
             it.onTabSelectedChange(infoList.indexOf(nextInfo), selectedInfo, nextInfo)
         }
         selectedInfo = nextInfo
+
+        autoScroll(nextInfo)
     }
 
     override fun inflateInfo(infoList: List<TabTopInfo<*>>) {
@@ -92,5 +97,88 @@ class TabTopLayout @JvmOverloads constructor(
             rootView.removeAllViews()
         }
         return rootView
+    }
+
+    private var tabWidth = 0
+    private fun autoScroll(nextInfo: TabTopInfo<*>) {
+        val clickTabTop = findTab(nextInfo) ?: return
+
+        val index = infoList.indexOf(nextInfo)
+        val loc = IntArray(2)
+
+        clickTabTop.getLocationInWindow(loc)
+        tabWidth = clickTabTop.width
+
+        val scrollWidth =
+        if ((loc[0] + tabWidth / 2) > DensityUtil.getDisplayWidthInPx(context) / 2) {
+            //点击了屏幕右侧
+            rangeScrollWidth(index, 2)
+        } else {
+            //点击了屏幕左侧
+            rangeScrollWidth(index, -2)
+        }
+
+        smoothScrollTo(scrollX + scrollWidth, 0)
+    }
+
+    /**
+     * 获取可滚动的范围
+     *
+     * @param index 从第几个开始
+     * @param range 向前向后的范围
+     * @return 可滚动的范围
+     */
+    private fun rangeScrollWidth(index: Int, range: Int): Int {
+        var scrollWidth = 0
+        for (i in 0 .. abs(range)) {
+            val next = if (range < 0) {
+                index + range + i
+            } else {
+                index + range - i
+            }
+
+            if (next >= 0 && next < infoList.size) {
+                if (range < 0) {
+                    scrollWidth -= getScrollWidth(next, false)
+                } else {
+                    scrollWidth += getScrollWidth(next, true)
+                }
+            }
+        }
+
+        return scrollWidth
+    }
+
+    /**
+     * 指定位置的控件可滚动的距离
+     *
+     * @param index   指定位置的控件
+     * @param toRight 是否是点击了屏幕右侧
+     * @return 可滚动的距离
+     */
+    private fun getScrollWidth(index: Int, toRight: Boolean): Int {
+        val target = findTab(infoList[index]) ?: return 0
+
+        val rect = Rect()
+        target.getLocalVisibleRect(rect)
+
+        if (toRight) {
+            return if (rect.right > tabWidth) {
+                //right坐标大于控件的宽度时，说明完全没有显示
+                tabWidth
+            } else {
+                //显示部分，减去已显示的宽度
+                tabWidth - rect.right
+            }
+        } else {
+            if (rect.left <= -tabWidth) {
+                //left坐标小于等于-控件的宽度，说明完全没有显示
+                return tabWidth
+            } else if (rect.left > 0) {
+                //显示部分
+                return rect.left
+            }
+        }
+        return 0
     }
 }
