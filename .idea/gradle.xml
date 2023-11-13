@@ -15,6 +15,8 @@
             <option value="$PROJECT_DIR$/mylibraries/lib_log" />
             <option value="$PROJECT_DIR$/mylibraries/lib_tab" />
             <option value="$PROJECT_DIR$/mylibraries/lib_utils" />
+            <option value="$PROJECT_DIR$/mywidgets" />
+            <option value="$PROJECT_DIR$/mywidgets/myRefreshLayout" />
           </set>
         </option>
         <option name="resolveExternalAnnotations" value="false" />
