@@ -16,6 +16,7 @@
             <option value="$PROJECT_DIR$/mylibraries/lib_tab" />
             <option value="$PROJECT_DIR$/mylibraries/lib_utils" />
             <option value="$PROJECT_DIR$/mywidgets" />
+            <option value="$PROJECT_DIR$/mywidgets/bannerView" />
             <option value="$PROJECT_DIR$/mywidgets/myRefreshLayout" />
           </set>
         </option>
