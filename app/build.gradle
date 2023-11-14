@@ -55,4 +55,5 @@ dependencies {
     implementation project(":mylibraries:lib_tab")
     implementation project(":mylibraries:lib_utils")
     implementation project(":mylibraries:lib_log")
+    implementation project(":mywidgets:myRefreshLayout")
 }
