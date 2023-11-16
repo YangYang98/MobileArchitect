@@ -1,7 +1,10 @@
 package com.yangyang.library.utils
 
+import android.content.Context
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.LayoutRes
 
 
 /**
@@ -37,6 +40,18 @@ object ViewUtil {
             }
         }
         return null
+    }
+
+    fun newInstance(parent: ViewGroup, @LayoutRes resId: Int): View {
+        return LayoutInflater.from(parent.context).inflate(resId, parent, false)
+    }
+
+    fun newInstance(context: Context, parent: ViewGroup?, @LayoutRes resId: Int): View {
+        return LayoutInflater.from(context).inflate(resId, parent, false)
+    }
+
+    fun newInstance(context: Context, @LayoutRes resId: Int): View {
+        return LayoutInflater.from(context).inflate(resId, null)
     }
 
 }

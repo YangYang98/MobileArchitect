@@ -7,6 +7,7 @@ import android.view.View.OnClickListener
 import android.widget.TextView
 import com.yangyang.common.ui.BaseFragment
 import com.yangyang.mobile.architect.R
+import com.yangyang.mobile.architect.demo.BannerViewActivity
 import com.yangyang.mobile.architect.demo.LogDemoActivity
 import com.yangyang.mobile.architect.demo.RefreshLayoutActivity
 import com.yangyang.mobile.architect.demo.TabBottomDemoActivity
@@ -29,6 +30,7 @@ class TestDemoFragment : BaseFragment(), OnClickListener {
         getView()?.findViewById<TextView>(R.id.tv_tab_bottom)?.setOnClickListener(this)
         getView()?.findViewById<TextView>(R.id.tv_tab_top)?.setOnClickListener(this)
         getView()?.findViewById<TextView>(R.id.tv_refresh_layout)?.setOnClickListener(this)
+        getView()?.findViewById<TextView>(R.id.tv_banner_view)?.setOnClickListener(this)
     }
 
     override fun onClick(v: View) {
@@ -44,6 +46,9 @@ class TestDemoFragment : BaseFragment(), OnClickListener {
             }
             R.id.tv_refresh_layout -> {
                 startActivity(Intent(context, RefreshLayoutActivity::class.java))
+            }
+            R.id.tv_banner_view -> {
+                startActivity(Intent(context, BannerViewActivity::class.java))
             }
         }
     }
