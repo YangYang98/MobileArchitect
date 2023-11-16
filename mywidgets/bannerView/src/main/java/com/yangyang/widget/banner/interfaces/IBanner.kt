@@ -29,6 +29,8 @@ interface IBanner {
 
     fun setOnBannerClickListener(onBannerClickListener: OnBannerClickListener)
 
+    fun setScrollDuration(duration: Int)
+
     interface OnBannerClickListener {
 
         fun onBannerClick(viewHolder: BannerAdapter.BannerViewHolder, bean: IBannerEntity, position: Int)

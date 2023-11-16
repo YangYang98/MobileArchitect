@@ -44,6 +44,16 @@ class AutoScrollViewPager @JvmOverloads constructor(
         mHandler.removeCallbacksAndMessages(null)
     }
 
+    fun setScrollDuration(duration: Int) {
+        try {
+            val scrollerField = ViewPager::class.java.getDeclaredField("mScroller")
+            scrollerField.isAccessible = true
+            scrollerField.set(this, BannerScroller(context, null, duration))
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
     private fun next(): Int {
         var nextPosition = -1
         if (adapter == null || adapter!!.count <= 1) {

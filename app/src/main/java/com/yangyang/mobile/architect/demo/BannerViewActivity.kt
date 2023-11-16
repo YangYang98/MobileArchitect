@@ -65,6 +65,7 @@ class BannerViewActivity : AppCompatActivity() {
         }
         mHiBanner.setAutoPlay(autoPlay)
         mHiBanner.setIntervalTime(2000)
+        mHiBanner.setScrollDuration(1000)
         //自定义布局
         mHiBanner.setBannerData(R.layout.banner_item_layout, moList)
         mHiBanner.setBindAdapter(object : IBindAdapter {

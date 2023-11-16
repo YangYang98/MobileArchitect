@@ -68,5 +68,9 @@ class BannerView @JvmOverloads constructor(
         bannerViewDelegate.setOnBannerClickListener(onBannerClickListener)
     }
 
+    override fun setScrollDuration(duration: Int) {
+        bannerViewDelegate.setScrollDuration(duration)
+    }
+
 
 }

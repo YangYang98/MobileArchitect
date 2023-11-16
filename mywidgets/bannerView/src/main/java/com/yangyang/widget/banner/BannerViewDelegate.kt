@@ -39,6 +39,7 @@ class BannerViewDelegate(private val context: Context, private val bannerView: B
                 mViewPager.intervalTime = value
             }
         }
+    private var mScrollDuration = -1
 
     private val mViewPager: AutoScrollViewPager by lazy {
         AutoScrollViewPager(context)
@@ -79,6 +80,13 @@ class BannerViewDelegate(private val context: Context, private val bannerView: B
 
     override fun setOnBannerClickListener(onBannerClickListener: IBanner.OnBannerClickListener) {
         mOnBannerClickListener = onBannerClickListener
+    }
+
+    override fun setScrollDuration(duration: Int) {
+        mScrollDuration = duration
+        if (duration > 0) {
+            mViewPager.setScrollDuration(duration)
+        }
     }
 
     override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
@@ -124,6 +132,9 @@ class BannerViewDelegate(private val context: Context, private val bannerView: B
         }
 
         val lp = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT)
+        if (mScrollDuration > 0) {
+            mViewPager.setScrollDuration(mScrollDuration)
+        }
 
         if ((mLoop || mAutoPlay) && mAdapter.getRealCount() != 0) {
             val firstItem =  mAdapter.getFirstItem()
