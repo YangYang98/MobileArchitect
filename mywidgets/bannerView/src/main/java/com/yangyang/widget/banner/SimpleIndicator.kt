@@ -14,7 +14,7 @@ class SimpleIndicator @JvmOverloads constructor(
 ): FrameLayout(context, attrs, defStyleAttr), IIndicator<FrameLayout> {
 
     override fun get(): FrameLayout {
-        return FrameLayout(context, attrs)
+        return this
     }
 
     override fun onInflate(count: Int) {

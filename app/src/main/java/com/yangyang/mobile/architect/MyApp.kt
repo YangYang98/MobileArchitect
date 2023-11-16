@@ -29,6 +29,10 @@ class MyApp : BaseApplication() {
                 override fun enable(): Boolean {
                     return true
                 }
+
+                override fun stackTraceDepth(): Int {
+                    return 0
+                }
             },
             ConsolePrinter(),
             FilePrinter.getInstance(applicationContext.cacheDir.absolutePath, 0)

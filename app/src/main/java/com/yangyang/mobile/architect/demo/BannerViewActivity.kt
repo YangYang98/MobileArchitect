@@ -13,6 +13,7 @@ import com.yangyang.mobile.architect.demo.bean.BannerEntity
 import com.yangyang.widget.banner.BannerAdapter
 import com.yangyang.widget.banner.BannerView
 import com.yangyang.widget.banner.bean.IBannerEntity
+import com.yangyang.widget.banner.indicator.CircleIndicator
 import com.yangyang.widget.banner.interfaces.IBanner
 import com.yangyang.widget.banner.interfaces.IBindAdapter
 import com.yangyang.widget.banner.interfaces.IIndicator
@@ -35,23 +36,23 @@ class BannerViewActivity : AppCompatActivity() {
     )
 
     private var indicator: IIndicator<*>? = null
-    private var autoPlay: Boolean = false
+    private var autoPlay: Boolean = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_banner_view)
-        initView()
+        initView(CircleIndicator(this))
         findViewById<Switch>(R.id.auto_play).setOnCheckedChangeListener { _, isChecked ->
             autoPlay = isChecked
-            initView()
+            initView(indicator)
         }
         findViewById<View>(R.id.tv_switch).setOnClickListener {
 
         }
     }
 
-    private fun initView() {
+    private fun initView(indicator: IIndicator<*>?) {
         val mHiBanner = findViewById<BannerView>(R.id.banner)
         val moList: MutableList<IBannerEntity> = ArrayList()
         for (i in 0..5) {
@@ -59,7 +60,9 @@ class BannerViewActivity : AppCompatActivity() {
             bannerEntity.url = urls[i % urls.size]
             moList.add(bannerEntity)
         }
-        //mHiBanner!!.setIndicator(indicator)
+        if (indicator != null) {
+            mHiBanner!!.setIndicator(indicator)
+        }
         mHiBanner.setAutoPlay(autoPlay)
         mHiBanner.setIntervalTime(2000)
         //自定义布局
