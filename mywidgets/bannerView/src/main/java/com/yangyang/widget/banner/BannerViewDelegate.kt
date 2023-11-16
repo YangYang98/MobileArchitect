@@ -4,6 +4,7 @@ import android.content.Context
 import android.widget.FrameLayout.LayoutParams
 import androidx.viewpager.widget.ViewPager.OnPageChangeListener
 import com.yangyang.widget.banner.bean.IBannerEntity
+import com.yangyang.widget.banner.indicator.SimpleIndicator
 import com.yangyang.widget.banner.interfaces.IBanner
 import com.yangyang.widget.banner.interfaces.IBindAdapter
 import com.yangyang.widget.banner.interfaces.IIndicator

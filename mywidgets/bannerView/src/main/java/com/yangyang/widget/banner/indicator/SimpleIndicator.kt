@@ -1,4 +1,4 @@
-package com.yangyang.widget.banner
+package com.yangyang.widget.banner.indicator
 
 import android.content.Context
 import android.util.AttributeSet
