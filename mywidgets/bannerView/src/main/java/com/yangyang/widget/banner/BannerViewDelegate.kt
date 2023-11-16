@@ -46,6 +46,7 @@ class BannerViewDelegate(private val context: Context, private val bannerView: B
     }
 
     override fun setBannerData(layoutResId: Int, datas: List<IBannerEntity>) {
+        mBanners.clear()
         mBanners.addAll(datas)
         init(layoutResId)
     }
