@@ -1,9 +1,11 @@
 package com.yangyang.library.utils
 
+import android.app.Activity
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.IdRes
 import androidx.annotation.LayoutRes
 
 
@@ -81,4 +83,18 @@ fun View?.visibleOrGone(isVisible: Boolean, doIfVisible: ((Boolean) -> Unit)? = 
 
 fun View?.visibleOrInvisible(isVisible: Boolean) {
     this?.visibility = if (isVisible) View.VISIBLE else View.INVISIBLE
+}
+
+fun <T : View> Activity.lazyFind(@IdRes id: Int) = lazy<T>(LazyThreadSafetyMode.NONE) {
+    findViewById(id)
+}
+
+//根据Id从ViewGroup中查找View, 用于inflate执行前
+fun <T : View> ViewGroup.lazyFind(@IdRes id: Int) = lazy<T>(LazyThreadSafetyMode.NONE) {
+    findViewById(id)
+}
+
+//根据Id从ViewGroup中查找View, 用于inflate执行前
+fun <T : View> ViewGroup.lazyFindNullable(@IdRes id: Int) = lazy<T?>(LazyThreadSafetyMode.NONE) {
+    findViewById(id)
 }
