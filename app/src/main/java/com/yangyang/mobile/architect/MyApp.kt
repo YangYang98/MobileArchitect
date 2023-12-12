@@ -6,6 +6,7 @@ import com.yangyang.library.log.LogManager
 import com.yangyang.library.log.bean.LogConfig
 import com.yangyang.library.log.printer.ConsolePrinter
 import com.yangyang.library.log.printer.FilePrinter
+import com.yangyang.library.utils.ActivityManager
 
 
 /**
@@ -37,5 +38,7 @@ class MyApp : BaseApplication() {
             ConsolePrinter(),
             FilePrinter.getInstance(applicationContext.cacheDir.absolutePath, 0)
         )
+
+        ActivityManager.instance.init(this)
     }
 }
