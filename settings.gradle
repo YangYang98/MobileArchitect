@@ -1,13 +1,45 @@
 pluginManagement {
     repositories {
+        maven { url = uri("https://maven.aliyun.com/repository/public/") }
+        maven { url = uri("https://maven.aliyun.com/repository/google/") }
+        maven { url = uri("https://maven.aliyun.com/repository/jcenter/") }
+        maven { url = uri("https://maven.aliyun.com/repository/central/") }
         google()
         mavenCentral()
         gradlePluginPortal()
     }
+
+    //PluginResolutionStrategy允许在PluginRequest(下载插件)之前对其进行修改，
+    // 并有唯一回调eachPlugin，eachPlugin的参数类型是PluginResolveDetails
+    //PluginResolveDetails：
+    //getRequested：获取请求的插件，返回PluginRequest对象，包含id、version、module信息；
+    //useModule：设置插件的模块；
+    //useVersion：设置插件的版本；
+    //getTarget：请求的目标插件；
+    resolutionStrategy {
+        eachPlugin {
+            if (requested.id.id == "org.gradle.sample") {
+                useModule("com.yangyang.plugin:gradlex:1.0")
+            }
+            if (requested.id.id == "com.yangyang.plugin") {
+                //设置过版本后, 在所有的build script中通过 plugins { } 引入插件则无需再次指定版本。
+                useVersion("2.0")
+            }
+        }
+    }
 }
 dependencyResolutionManagement {
+    //表示优先使用全局定义的仓库，而不是项目中单独定义的仓库。如果项目中定义了与全局冲突(没有)的仓库，会报错。
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
+        maven { url 'https://maven.aliyun.com/repository/google' }
+        maven { url 'https://maven.aliyun.com/repository/central' }
+        maven {
+            url = uri("https://maven.aliyun.com/nexus/content/groups/public/")
+        }
+        maven {
+            url = uri("https://maven.aliyun.com/nexus/content/repositories/jcenter")
+        }
         google()
         mavenCentral()
     }
@@ -21,3 +53,4 @@ include ':mylibraries:lib_tab'
 include ':common'
 include ':mywidgets:myRefreshLayout'
 include ':mywidgets:bannerView'
+//project(':mywidgets:myRefreshLayout').projectDir = new File(rootDir, 'mywidgets/myRefreshLayout') // 添加子项目路径
