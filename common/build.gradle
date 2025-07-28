@@ -39,4 +39,5 @@ dependencies {
     androidTestImplementation libs.espresso.core
 
     implementation project(":mylibraries:lib_tab")
+    implementation project(":mylibraries:lib_utils")
 }
